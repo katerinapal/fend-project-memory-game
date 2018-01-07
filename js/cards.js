@@ -43,13 +43,15 @@ var Cards = (function() {
                     } else {
                         if (openedCard.innerHTML == currentCard.innerHTML) {
                             openedCard.classList.add("open", "show", "match");
-                            currentCard.classList.add("open", "show", "match");
                             // only clickable one time.
                             openedCard.onclick = null;
                             currentCard.onclick = null;
 
-                            // emit an event
-                            EVT.emit("popup-congrats");
+                            currentCard.classList.add("open", "show", "match");
+
+                            // gives some buffer for the last node to render styles
+                            setTimeout(function(){EVT.emit("popup-congrats")},1000);
+                            // });
                         } else {
                             openedCard.classList.remove(
                                 "open",
@@ -68,9 +70,8 @@ var Cards = (function() {
                             newNode.classList.add("close");
                             // replace the current node with the new node
                             currentCard.replaceWith(newNode);
-                            // assign the new node onclick function
+                            // assign onclick function to the new node
                             newNode.onclick = currentCard.onclick;
-
                             // emit an event
                             EVT.emit("handle-stars");
                         }

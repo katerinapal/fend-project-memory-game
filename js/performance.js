@@ -77,9 +77,10 @@ var Performance = (function() {
                     "Congratulations! You finished the game with " +
                         numOfStars +
                         " stars in " +
-                        duration +". Do you want to play again?"
+                        duration +
+                        ". Do you want to play again?"
                 );
-                if(result) location.reload();
+                if (result) location.reload();
             }
         });
     }
