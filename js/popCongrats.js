@@ -1,4 +1,5 @@
 var Congrats = (function() {
+
     function popupCongrats() {
         // take an event
         EVT.on("popup-congrats", function() {
@@ -6,13 +7,19 @@ var Congrats = (function() {
             if (successCounter === 8) {
                 clearInterval(timer);
                 timer = null;
-                alert(
+                var numOfStars = window.numOfStars ? window.numOfStars : 3;
+                var congratsMessage = confirm(
                     "Congratulations! You finished the game with " +
-                        moveCounter +
+                        window.moveCounter +
                         " moves and " +
-                        numOfStars +
-                        " stars!"
+                        +numOfStars +
+                        " stars in " +
+                        window.duration +
+                        "."
                 );
+                if (congratsMessage) {
+                    location.reload();
+                }
             }
         });
     }

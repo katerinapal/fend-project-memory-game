@@ -3,6 +3,7 @@ var Moves = (function() {
         EVT.on("calculate-moves", function() {
             moveCounter += 1;
             moves.innerHTML = moveCounter;
+            window.moveCounter = moveCounter;
         });
     }
 

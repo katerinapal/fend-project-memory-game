@@ -40,45 +40,59 @@ var Cards = (function() {
                         currentCard.classList.remove("close");
                         currentCard.classList.add("open", "show");
                         openedCard = currentCard;
+                        openedCard.index = i;
                     } else {
-                        if (openedCard.innerHTML == currentCard.innerHTML) {
-                            openedCard.classList.add("open", "show", "match");
-                            // only clickable one time.
-                            openedCard.onclick = null;
-                            currentCard.onclick = null;
+                        currentCard.index = i;
+                        // make sure styles won't apply on the same card that is clicked more than once!
+                        if (openedCard.index != currentCard.index) {
+                            if (openedCard.innerHTML == currentCard.innerHTML) {
+                                openedCard.classList.add(
+                                    "open",
+                                    "show",
+                                    "match"
+                                );
+                                // only clickable one time.
+                                openedCard.onclick = null;
+                                currentCard.onclick = null;
 
-                            currentCard.classList.add("open", "show", "match");
+                                currentCard.classList.add(
+                                    "open",
+                                    "show",
+                                    "match"
+                                );
 
-                            // gives some buffer for the last node to render styles
-                            setTimeout(function(){EVT.emit("popup-congrats")},1000);
-                            // });
-                        } else {
-                            openedCard.classList.remove(
-                                "open",
-                                "show",
-                                "match"
-                            );
-                            openedCard.classList.add("close");
-                            currentCard.classList.remove(
-                                "open",
-                                "show",
-                                "match",
-                                "close"
-                            );
-                            // deep clone a new node to inherit className:'close'
-                            var newNode = currentCard.cloneNode(true);
-                            newNode.classList.add("close");
-                            // replace the current node with the new node
-                            currentCard.replaceWith(newNode);
-                            // assign onclick function to the new node
-                            newNode.onclick = currentCard.onclick;
+                                // gives some buffer for the last node to render styles
+                                setTimeout(function() {
+                                    EVT.emit("popup-congrats");
+                                }, 1000);
+                            } else {
+                                openedCard.classList.remove(
+                                    "open",
+                                    "show",
+                                    "match"
+                                );
+                                openedCard.classList.add("close");
+                                currentCard.classList.remove(
+                                    "open",
+                                    "show",
+                                    "match",
+                                    "close"
+                                );
+                                // deep clone a new node to inherit className:'close'
+                                var newNode = currentCard.cloneNode(true);
+                                newNode.classList.add("close");
+                                // replace the current node with the new node
+                                currentCard.replaceWith(newNode);
+                                // assign onclick function to the new node
+                                newNode.onclick = currentCard.onclick;
+                                // emit an event
+                                EVT.emit("handle-stars");
+                            }
+                            newNode = null;
+                            openedCard = null;
                             // emit an event
-                            EVT.emit("handle-stars");
+                            EVT.emit("calculate-moves");
                         }
-                        newNode = null;
-                        openedCard = null;
-                        // emit an event
-                        EVT.emit("calculate-moves");
                     }
                 };
             })(i);

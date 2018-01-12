@@ -7,6 +7,7 @@ var Stars = (function() {
                 if (numOfStars >= 1) {
                     numOfStars -= 1;
                     stars[numOfStars].classList.add("fa-star-o");
+                    window.numOfStars = numOfStars;
                 }
             }
         });
