@@ -1,16 +1,19 @@
-var Stars = (function() {
+define(["cards"], function(cards) {
     function handleStars() {
         // take an event
-        EVT.on("handle-stars", function() {
+        cards.EVT.on("handle-stars", function() {
             starReducer += 1;
             if (starReducer > 0 && starReducer % 2 === 0) {
-                if (numOfStars >= 1) {
+                if (numOfStars >= 2) {
                     numOfStars -= 1;
                     stars[numOfStars].classList.add("fa-star-o");
-                    window.numOfStars = numOfStars;
                 }
             }
         });
+         // due to asyn, reserve the variable in a function
+        return function() {
+            return numOfStars;
+        };
     }
 
     function initialize() {
@@ -25,7 +28,7 @@ var Stars = (function() {
     return {
         run: function() {
             initialize();
-            handleStars();
-        }
+        },
+        numOfStars:handleStars()
     };
-})();
+});

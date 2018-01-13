@@ -1,10 +1,13 @@
-var Moves = (function() {
+define(["cards"], function(cards) {
     function handleMoves() {
-        EVT.on("calculate-moves", function() {
+        cards.EVT.on("calculate-moves", function() {
             moveCounter += 1;
             moves.innerHTML = moveCounter;
-            window.moveCounter = moveCounter;
         });
+     // due to asyn, reserve the variable in a function
+        return function() {
+            return moveCounter;
+        };
     }
 
     function initialize() {
@@ -17,7 +20,7 @@ var Moves = (function() {
     return {
         run: function() {
             initialize();
-            handleMoves();
-        }
+        },
+        moveCounter: handleMoves()
     };
-})();
+});

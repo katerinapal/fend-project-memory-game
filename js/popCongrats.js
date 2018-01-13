@@ -1,24 +1,26 @@
-var Congrats = (function() {
-
+define(["stars", "moves", "timers", "cards"], function(
+    stars,
+    moves,
+    timers,
+    cards
+) {
     function popupCongrats() {
         // take an event
-        EVT.on("popup-congrats", function() {
+        cards.EVT.on("popup-congrats", function() {
             successCounter += 1;
             if (successCounter === 8) {
-                clearInterval(timer);
-                timer = null;
-                var numOfStars = window.numOfStars ? window.numOfStars : 3;
                 var congratsMessage = confirm(
                     "Congratulations! You finished the game with " +
-                        window.moveCounter +
+                        moves.moveCounter() +
                         " moves and " +
-                        +numOfStars +
+                        +stars.numOfStars() +
                         " stars in " +
-                        window.duration +
-                        "."
+                        timers.duration()
                 );
                 if (congratsMessage) {
                     location.reload();
+                } else {
+                    timers.stopTimer();
                 }
             }
         });
@@ -35,4 +37,4 @@ var Congrats = (function() {
             popupCongrats();
         }
     };
-})();
+});

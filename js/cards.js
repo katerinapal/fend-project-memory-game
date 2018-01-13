@@ -1,4 +1,5 @@
-var Cards = (function() {
+define(["EventEmitter2"], function(EventEmitter2) {
+    var EVT = new EventEmitter2();
     // helper function of Fisher-Yates shuffle function
     function getRandomIndex(low, high) {
         return Math.floor(Math.random() * (high - low + 1) + low);
@@ -113,6 +114,7 @@ var Cards = (function() {
             initialize();
             playGame();
             restartGame();
-        }
+        },
+        EVT:EVT
     };
-})();
+});

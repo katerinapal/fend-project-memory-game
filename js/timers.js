@@ -1,4 +1,4 @@
-var Timer = (function() {
+define(["cards"], function(cards) {
     function formatHelper(num) {
         return num >= 10 ? num : "0" + num;
     }
@@ -29,23 +29,27 @@ var Timer = (function() {
             formatHelper(minute) +
             ":" +
             formatHelper(second);
-        var duration = generateDuration(timerEle.innerHTML.split(":"));
-        window.duration = duration;
+        duration = generateDuration(timerEle.innerHTML.split(":"));
     }
 
     function startTimer() {
         // take the event
-        EVT.on("start-timer", function() {
-            if (isTimerStarted) {
-                if (timer) {
-                    clearInterval(timer);
-                    timer = null;
-                }
-                timer = setInterval(countup, 1000);
+        cards.EVT.on("start-timer", function() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
             }
-
-            isTimerStarted = false;
+            timer = setInterval(countup, 1000);
         });
+        // due to asyn, reserve the variable in a function
+        return function() {
+            return duration;
+        };
+    }
+
+    function zeroTimer() {
+        clearInterval(timer);
+        timer = null;
     }
 
     function initialize() {
@@ -55,12 +59,13 @@ var Timer = (function() {
         secondCounter = 0;
     }
 
-    var isTimerStarted, timer, timerEle, secondCounter;
+    var timer, timerEle, secondCounter, duration;
 
     return {
         run: function() {
             initialize();
-            startTimer();
-        }
+        },
+        duration: startTimer(),
+        stopTimer: zeroTimer
     };
-})();
+});

@@ -1,7 +1,13 @@
-// Use EventEmitter to decouple functions
-var EVT = new EventEmitter2();
-    Cards.run();
-    Moves.run();
-    Stars.run();
-    Timer.run();
-    Congrats.run();
+require(["cards", "moves", "stars", "timers", "popCongrats"], function(
+    cards,
+    moves,
+    stars,
+    timers,
+    popCongrats
+) {
+    cards.run();
+    moves.run();
+    stars.run();
+    timers.run();
+    popCongrats.run();
+});
