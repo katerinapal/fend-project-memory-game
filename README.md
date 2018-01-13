@@ -7,6 +7,6 @@
 
 
 ## Resources:
-EventEmitter2 library for modularizing js code:
-https://github.com/asyncly/EventEmitter2
+https://github.com/asyncly/EventEmitter2 (for emitting and taking in events)
+http://requirejs.org/docs/download.html (for modularizing JS code)
 
