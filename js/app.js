@@ -1,13 +1,11 @@
-require(["cards", "moves", "stars", "timers", "popCongrats"], function(
-    cards,
-    moves,
-    stars,
-    timers,
-    popCongrats
-) {
-    cards.run();
-    moves.run();
-    stars.run();
-    timers.run();
-    popCongrats.run();
-});
+import cards from ".\\cards.js";
+import moves from ".\\moves.js";
+import stars from ".\\stars.js";
+import timers from ".\\timers.js";
+import popCongrats from ".\\popCongrats.js";
+;
+cards.run();
+moves.run();
+stars.run();
+timers.run();
+popCongrats.run();
