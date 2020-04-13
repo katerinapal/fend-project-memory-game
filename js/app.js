@@ -1,3 +1,4 @@
+"use strict";
 require(["cards", "moves", "stars", "timers", "popCongrats"], function(
     cards,
     moves,

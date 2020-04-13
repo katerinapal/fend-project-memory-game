@@ -1,3 +1,4 @@
+"use strict";
 define(["cards"], function(cards) {
     function handleStars() {
         // take an event

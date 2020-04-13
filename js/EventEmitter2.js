@@ -1,3 +1,4 @@
+"use strict";
 /*!
  * EventEmitter2
  * https://github.com/hij1nx/EventEmitter2

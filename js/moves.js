@@ -1,3 +1,4 @@
+"use strict";
 define(["cards"], function(cards) {
     function handleMoves() {
         cards.EVT.on("calculate-moves", function() {

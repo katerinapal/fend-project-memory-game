@@ -1,3 +1,4 @@
+"use strict";
 define(["cards"], function(cards) {
     function formatHelper(num) {
         return num >= 10 ? num : "0" + num;

@@ -1,3 +1,4 @@
+"use strict";
 define(["EventEmitter2"], function(EventEmitter2) {
     var EVT = new EventEmitter2();
     // helper function of Fisher-Yates shuffle function

@@ -1,3 +1,4 @@
+"use strict";
 define(["stars", "moves", "timers", "cards"], function(
     stars,
     moves,
